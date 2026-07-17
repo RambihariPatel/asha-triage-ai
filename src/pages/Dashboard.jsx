@@ -201,35 +201,26 @@ const Dashboard = () => {
     const isOffline = localStorage.getItem('triage_offline_mode') === 'true';
 
     if (isOffline) {
-      setSyncError(t("Cannot sync — Offline Mode is ON. Go to Settings to disable it.", {
-        hi: "सिंक नहीं हो सकता — ऑफ़लाइन मोड चालू है। सेटिंग्स में जाकर बंद करें।",
-        te: "సింక్ చేయడం సాధ్యం కాదు — ఆఫ్‌లైన్ మోడ్ ON ఉంది. సెట్టింగ్స్‌లో ఆపివేయండి."
-      }));
+      setSyncError("Cannot sync. AshaTriage is in simulated Offline Mode. Turn off Offline Mode in Settings to sync data.");
       setTimeout(() => setSyncError(''), 4000);
       return;
     }
 
     if (pendingSync === 0) {
-      setSyncMessage(t("✓ All patient logs are already synced with the central health portal.", {
-        hi: "✓ सभी मरीजों का डेटा पहले से ही सेंट्रल हेल्थ पोर्टल से सिंक हो चुका है।",
-        te: "✓ అన్ని రోగుల డేటా ఇప్పటికే సెంట్రల్ హెల్త్ పోర్టల్‌తో సింక్ చేయబడింది."
+      alert(t("All patient logs are already synced with the central health portal.", {
+        hi: "सभी मरीज रिकॉर्ड्स पहले से ही केंद्रीय पोर्टल के साथ सिंक हैं।",
+        te: "అన్ని రోగుల రికార్డులు ఇప్పటికే కేంద్ర పోర్టల్‌తో సింక్ చేయబడ్డాయి."
       }));
-      setTimeout(() => setSyncMessage(''), 3500);
       return;
     }
 
     setSyncing(true);
-    setSyncMessage(t("Connecting to National Health Database...", {
-      hi: "राष्ट्रीय स्वास्थ्य डेटाबेस से जोड़ा जा रहा है...",
-      te: "జాతీయ ఆరోగ్య డేటాబేస్‌కు కనెక్ట్ అవుతోంది..."
-    }));
+    setSyncMessage("Connecting to National Health Database...");
 
     setTimeout(() => {
-      setSyncMessage(t("Syncing patient vitals, diagnostics, and AI assessments...", {
-        hi: "मरीजों के वाइटल्स, डायग्नोस्टिक्स और AI रिपोर्ट सिंक हो रहे हैं...",
-        te: "రోగుల వైటల్స్, డయాగ్నస్టిక్స్ మరియు AI అంచనాలు సింక్ అవుతున్నాయి..."
-      }));
+      setSyncMessage("Syncing patient vitals, diagnostics, and AI assessments...");
       setTimeout(() => {
+        // Update all pending cases to synced
         const updatedPatients = patients.map(p => {
           if (p.syncStatus === 'pending') {
             return { ...p, syncStatus: 'synced' };
@@ -240,11 +231,11 @@ const Dashboard = () => {
         localStorage.setItem('asha_patients', JSON.stringify(updatedPatients));
         setPatients(updatedPatients);
         setSyncing(false);
-        setSyncMessage(t("✓ Offline patient logs synced successfully with the central portal!", {
-          hi: "✓ ऑफ़लाइन मरीजों का डेटा सफलतापूर्वक सिंक हो गया!",
-          te: "✓ ఆఫ్‌లైన్ రోగుల డేటా విజయవంతంగా సింక్ చేయబడింది!"
+        setSyncMessage('');
+        alert(t("Offline patient logs synced successfully with the central portal!", {
+          hi: "ऑफ़लाइन मरीजों का डेटा सफलतापूर्वक सिंक हो गया!",
+          te: "ఆఫ్‌లైన్ రోగుల డేటా విజయవంతంగా సింక్ చేయబడింది!"
         }));
-        setTimeout(() => setSyncMessage(''), 4000);
       }, 1200);
     }, 800);
   };
@@ -283,15 +274,9 @@ const Dashboard = () => {
               onClick={handleSyncCases}
               disabled={syncing}
               className="btn-secondary"
-              title={pendingSync === 0 ? t('All logs already synced', {hi: 'सभी डेटा सिंक हो चुका है', te: 'అన్ని డేటా సింక్ చేయబడ్డాయి'}) : t('Click to sync offline patient logs', {hi: 'ऑफ़लाइन डेटा सिंक करने के लिए क्लिक करें', te: 'ఆఫ్‌లైన్ డేటాను సింక్ చేయడానికి క్లిక్ చేయండి'})}
             >
               <RefreshCw size={16} className={syncing ? "loading-spinner" : ""} />
-              {syncing 
-                ? t('Syncing...', { hi: 'सिंक हो रहा है...', te: 'సింక్ అవుతోంది...' }) 
-                : pendingSync > 0 
-                  ? `${t('Sync Offline Logs', { hi: 'ऑफ़लाइन डेटा सिंक करें', te: 'ఆఫ్‌లైన్ డేటాను సింక్ చేయండి' })} (${pendingSync})`
-                  : t('All Synced ✓', { hi: 'सभी सिंक ✓', te: 'అన్నీ సింక్ ✓' })
-              }
+              {syncing ? t('Syncing...', { hi: 'सिंक हो रहा है...', te: 'సింక్ అవుతోంది...' }) : `${t('Sync Offline Logs', { hi: 'ऑफ़लाइन डेटा सिंक करें', te: 'ఆఫ్‌లైన్ డేటాను సింక్ చేయండి' })} (${pendingSync})`}
             </button>
             <button 
               onClick={() => navigate('/triage')} 
@@ -335,28 +320,7 @@ const Dashboard = () => {
           </div>
         )}
 
-        {/* Sync success/info toast — shown after sync or when already synced */}
-        {!syncing && syncMessage && (
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.6rem',
-            background: 'linear-gradient(135deg, #d1fae5, #a7f3d0)',
-            border: '1px solid #6ee7b7',
-            borderRadius: 'var(--border-radius-md)',
-            padding: '0.75rem 1.2rem',
-            marginBottom: '1rem',
-            color: '#065f46',
-            fontWeight: '500',
-            fontSize: '0.9rem',
-            boxShadow: '0 2px 8px rgba(16,185,129,0.15)'
-          }}>
-            <span style={{ fontSize: '1.1rem' }}>✅</span>
-            <span>{syncMessage}</span>
-          </div>
-        )}
-
-
+        {/* Analytics Grid */}
         <section className="overview-metrics-grid">
           <div className="metric-card total">
             <div className="metric-card-info">
