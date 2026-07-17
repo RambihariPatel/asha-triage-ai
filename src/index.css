@@ -70,6 +70,80 @@
   --transition-normal: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* --- Dark Mode (Night Mode) --- */
+body.dark {
+  --bg-base: #0d1117;
+  --bg-surface: #161b22;
+  --bg-surface-elevated: #1c2128;
+  --bg-surface-glass: rgba(22, 27, 34, 0.92);
+
+  --primary-solid: #2dd4bf;
+  --primary-hover: #5eead4;
+  --primary-light: rgba(45, 212, 191, 0.12);
+  --primary-accent: #22d3ee;
+
+  --text-primary: #e6edf3;
+  --text-secondary: #8b949e;
+  --text-muted: #484f58;
+  --text-on-accent: #0d1117;
+
+  --border-color: #30363d;
+  --border-light: #21262d;
+  --border-focus: rgba(45, 212, 191, 0.4);
+
+  --shadow-sm: 0 2px 8px 0 rgba(0,0,0,0.35);
+  --shadow-md: 0 6px 20px -2px rgba(0,0,0,0.5);
+  --shadow-lg: 0 20px 40px -8px rgba(0,0,0,0.6);
+  --shadow-glow-teal: 0 0 30px rgba(45, 212, 191, 0.2);
+
+  --triage-red-bg: #2d1515;
+  --triage-red-border: #4a1a1a;
+  --triage-red-text: #fca5a5;
+
+  --triage-orange-bg: #2d1a08;
+  --triage-orange-border: #4a2a10;
+  --triage-orange-text: #fdba74;
+
+  --triage-yellow-bg: #1f1a06;
+  --triage-yellow-border: #3d3008;
+  --triage-yellow-text: #fde047;
+
+  --triage-green-bg: #0d1f14;
+  --triage-green-border: #163a22;
+  --triage-green-text: #86efac;
+
+  --color-success: #34d399;
+  --color-success-bg: rgba(52, 211, 153, 0.12);
+  --color-error: #f87171;
+  --color-error-bg: rgba(248, 113, 113, 0.12);
+  --color-warning: #fbbf24;
+  --color-info: #60a5fa;
+  --color-info-bg: rgba(96, 165, 250, 0.12);
+}
+
+/* Smooth theme transition */
+body, body * {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Clickable card styles */
+.metric-card-clickable {
+  cursor: pointer;
+}
+.metric-card-clickable:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-solid);
+}
+.summary-card-clickable {
+  cursor: pointer;
+}
+.summary-card-clickable:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-md);
+  opacity: 0.92;
+}
+
 /* --- Base Resets & Global Styles --- */
 * {
   box-sizing: border-box;

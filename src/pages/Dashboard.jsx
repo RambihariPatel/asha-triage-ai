@@ -322,7 +322,7 @@ const Dashboard = () => {
 
         {/* Analytics Grid */}
         <section className="overview-metrics-grid">
-          <div className="metric-card total">
+          <div className="metric-card total metric-card-clickable" onClick={() => navigate('/analytics')} title="View full analytics">
             <div className="metric-card-info">
               <span className="metric-card-label">{t('Total Patients', { hi: 'कुल मरीज', te: 'మొత్తం రోగులు' })}</span>
               <span className="metric-card-value">{totalTriaged}</span>
@@ -332,7 +332,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="metric-card red-orange">
+          <div className="metric-card red-orange metric-card-clickable" onClick={() => { setSearchQuery('RED'); setCurrentPage(1); }} title="Filter emergency cases">
             <div className="metric-card-info">
               <span className="metric-card-label">{t('Emergency (Red/Orange)', { hi: 'आपातकाल (लाल/नारंगी)', te: 'అత్యవసర (ఎరుపు/నారింజ)' })}</span>
               <span className="metric-card-value">{emergencyCases}</span>
@@ -342,7 +342,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="metric-card yellow-green">
+          <div className="metric-card yellow-green metric-card-clickable" onClick={() => { setSearchQuery('GREEN'); setCurrentPage(1); }} title="Filter stable cases">
             <div className="metric-card-info">
               <span className="metric-card-label">{t('Stable (Yellow/Green)', { hi: 'स्थिर (पीला/हरा)', te: 'స్థిరమైన (పసుపు/ఆకుపచ్చ)' })}</span>
               <span className="metric-card-value">{stableCases}</span>
@@ -352,7 +352,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="metric-card offline">
+          <div className="metric-card offline metric-card-clickable" onClick={handleSyncCases} title="Click to sync pending logs">
             <div className="metric-card-info">
               <span className="metric-card-label">{t('Pending Sync (Offline)', { hi: 'सिंक होना बाकी', te: 'సింక్ పెండింగ్‌లో ఉంది' })}</span>
               <span className="metric-card-value">{pendingSync}</span>
@@ -365,19 +365,19 @@ const Dashboard = () => {
 
         {/* Triage Urgency Distribution Cards */}
         <section className="service-summary-grid">
-          <div className="summary-card-item red">
+          <div className="summary-card-item red summary-card-clickable" onClick={() => { setSearchQuery('RED'); setCurrentPage(1); }} title="Filter RED cases">
             <span className="summary-item-label">RED Priority</span>
             <span className="summary-item-value">{redCount} <span style={{ fontSize: '0.8rem', fontWeight: 'normal', color: 'var(--text-secondary)' }}>{t('Immediate', { hi: 'तुरंत', te: 'వెంటనే' })}</span></span>
           </div>
-          <div className="summary-card-item orange">
+          <div className="summary-card-item orange summary-card-clickable" onClick={() => { setSearchQuery('ORANGE'); setCurrentPage(1); }} title="Filter ORANGE cases">
             <span className="summary-item-label">ORANGE Priority</span>
             <span className="summary-item-value">{orangeCount} <span style={{ fontSize: '0.8rem', fontWeight: 'normal', color: 'var(--text-secondary)' }}>{t('Very Urgent', { hi: 'अति आवश्यक', te: 'అత్యవసరం' })}</span></span>
           </div>
-          <div className="summary-card-item yellow">
+          <div className="summary-card-item yellow summary-card-clickable" onClick={() => { setSearchQuery('YELLOW'); setCurrentPage(1); }} title="Filter YELLOW cases">
             <span className="summary-item-label">YELLOW Priority</span>
             <span className="summary-item-value">{yellowCount} <span style={{ fontSize: '0.8rem', fontWeight: 'normal', color: 'var(--text-secondary)' }}>{t('Urgent', { hi: 'आवश्यक', te: 'అవసరం' })}</span></span>
           </div>
-          <div className="summary-card-item green">
+          <div className="summary-card-item green summary-card-clickable" onClick={() => { setSearchQuery('GREEN'); setCurrentPage(1); }} title="Filter GREEN cases">
             <span className="summary-item-label">GREEN Priority</span>
             <span className="summary-item-value">{greenCount} <span style={{ fontSize: '0.8rem', fontWeight: 'normal', color: 'var(--text-secondary)' }}>{t('Stable', { hi: 'स्थिर', te: 'స్థిరమైన' })}</span></span>
           </div>

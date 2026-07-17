@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Cookies from 'js-cookie';
-import { Home, Settings, LogOut, Activity, Globe, Menu, X } from 'lucide-react';
+import { Home, Settings, LogOut, Activity, Globe, Menu, X, Moon, Sun } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const Navbar = () => {
@@ -9,7 +9,22 @@ const Navbar = () => {
   const location = useLocation();
   const [offlineMode, setOfflineMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDark, setIsDark] = useState(() => {
+    return localStorage.getItem('asha_dark_mode') === 'true';
+  });
   const { language, setLanguage, t } = useLanguage();
+
+  // Apply dark mode class to body on mount and toggle
+  useEffect(() => {
+    if (isDark) {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+    localStorage.setItem('asha_dark_mode', isDark);
+  }, [isDark]);
+
+  const toggleDark = () => setIsDark(prev => !prev);
 
   const checkOfflineStatus = () => {
     setOfflineMode(localStorage.getItem('triage_offline_mode') === 'true');
@@ -69,6 +84,28 @@ const Navbar = () => {
               <option value="te">తెలుగు</option>
             </select>
           </div>
+
+          {/* Dark Mode Toggle */}
+          <button
+            onClick={toggleDark}
+            aria-label="Toggle dark mode"
+            title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '0.4rem',
+              borderRadius: '50px',
+              border: '1px solid var(--border-light)',
+              backgroundColor: 'var(--bg-surface-elevated)',
+              cursor: 'pointer',
+              color: isDark ? '#fbbf24' : 'var(--text-secondary)',
+              transition: 'all 0.2s ease',
+              flexShrink: 0
+            }}
+          >
+            {isDark ? <Sun size={17} /> : <Moon size={17} />}
+          </button>
 
           {/* Status Badge */}
           <div className={`navbar-status-badge ${offlineMode ? 'offline' : 'online'}`}>
