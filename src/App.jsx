@@ -17,36 +17,36 @@ function App() {
   return (
     <LanguageProvider>
       <BrowserRouter>
-        {/* Global floating SOS button */}
+        {/* Global floating SOS button - must be inside BrowserRouter for Link to work */}
         <SOSButton />
-      
-      <Routes>
-        {/* Public Authentication Route */}
-        <Route path="/login" element={<Login />} />
 
-        {/* Protected Application Routes */}
-        <Route element={<ProtectedRoute />}>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/triage" element={<TriageSession />} />
-          <Route path="/patient/:id" element={<PatientDetail />} />
-          <Route path="/patient/:id/export" element={<ExportReport />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/analytics" element={<Analytics />} />
-          <Route path="/protocols" element={<EmergencyProtocols />} />
-          
-          {/* Backward compatibility route mapping */}
-          <Route path="/referral/:id" element={<PatientDetail />} />
-          
-          {/* Optional Redirect for old dashboard paths */}
-          <Route 
-            path="/dashboard/referrals" 
-            element={<Navigate to="/" replace />} 
-          />
-        </Route>
+        <Routes>
+          {/* Public Authentication Route */}
+          <Route path="/login" element={<Login />} />
 
-        {/* Public Fallback 404 Route */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          {/* Protected Application Routes */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/triage" element={<TriageSession />} />
+            <Route path="/patient/:id" element={<PatientDetail />} />
+            <Route path="/patient/:id/export" element={<ExportReport />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/analytics" element={<Analytics />} />
+            <Route path="/protocols" element={<EmergencyProtocols />} />
+
+            {/* Backward compatibility route mapping */}
+            <Route path="/referral/:id" element={<PatientDetail />} />
+
+            {/* Optional Redirect for old dashboard paths */}
+            <Route
+              path="/dashboard/referrals"
+              element={<Navigate to="/" replace />}
+            />
+          </Route>
+
+          {/* Public Fallback 404 Route */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </BrowserRouter>
     </LanguageProvider>
   );

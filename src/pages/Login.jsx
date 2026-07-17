@@ -133,8 +133,8 @@ const Login = () => {
         {/* Credentials Helper for Evaluators */}
         <div className="login-credentials-helper">
           <p style={{ fontWeight: '600', marginBottom: '0.25rem' }}>{t('Demo Credentials:', {hi: 'डेमो क्रेडेंशियल:', te: 'డెమో ఆధారాలు:'})}</p>
-          <p>{t('Email', {hi: 'ईमेल', te: 'ఇమెయిల్'})}: <code>admin@example.com</code></p>
-          <p>{t('Password', {hi: 'पासवर्ड', te: 'పాస్‌వర్డ్'})}: <code>admin123</code></p>
+          <p>{t('Email:', {hi: 'ईमेल:', te: 'ఇమెయిల్:'})} <code>admin@example.com</code></p>
+          <p>{t('Password:', {hi: 'पासवर्ड:', te: 'పాస్‌వర్డ్:'})} <code>admin123</code></p>
         </div>
 
       </div>
