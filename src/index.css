@@ -1924,3 +1924,135 @@ td {
   }
 }
 
+/* ═══════════════════════════════════════════════
+   ANALYTICS PAGE — Responsive Fixes
+═══════════════════════════════════════════════ */
+.analytics-two-col-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .analytics-two-col-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   DARK MODE — Select/Input overrides
+═══════════════════════════════════════════════ */
+body.dark select option {
+  background-color: #1c2128;
+  color: #e6edf3;
+}
+body.dark .sort-dropdown-select {
+  background-color: var(--bg-surface-elevated);
+  color: var(--text-primary);
+}
+body.dark .search-text-filter {
+  background-color: var(--bg-surface-elevated);
+  color: var(--text-primary);
+}
+body.dark table {
+  background-color: var(--bg-surface);
+}
+body.dark table th {
+  background-color: var(--bg-surface-elevated);
+  color: var(--text-secondary);
+  border-bottom-color: var(--border-color);
+}
+body.dark table td {
+  border-bottom-color: var(--border-light);
+}
+body.dark .referrals-interactive-row:hover {
+  background-color: var(--bg-surface-elevated);
+}
+body.dark .navbar-header {
+  background-color: rgba(22, 27, 34, 0.95);
+  border-bottom-color: var(--border-light);
+}
+body.dark .login-card-container {
+  background-color: var(--bg-surface);
+  border-color: var(--border-color);
+}
+body.dark .field-text-input {
+  background-color: var(--bg-surface-elevated);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+body.dark .login-credentials-helper {
+  background-color: var(--bg-surface-elevated);
+  border-color: var(--border-color);
+}
+body.dark code {
+  background-color: rgba(45, 212, 191, 0.12);
+  color: var(--primary-solid);
+}
+
+/* ═══════════════════════════════════════════════
+   UNIVERSAL CARD HOVER LIFT — All interactive cards
+═══════════════════════════════════════════════ */
+.metric-card-clickable,
+.summary-card-clickable {
+  transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.22s ease !important;
+}
+
+/* ═══════════════════════════════════════════════
+   SETTINGS PAGE — Mobile Responsive
+═══════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  .settings-page-wrapper {
+    padding: 1rem !important;
+  }
+  .settings-section-card {
+    padding: 1.25rem !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   EMERGENCY PROTOCOLS PAGE — Mobile Responsive
+═══════════════════════════════════════════════ */
+@media (max-width: 600px) {
+  .protocol-header-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.75rem !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   PATIENT DETAIL PAGE — Mobile Responsive
+═══════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  .vital-summary-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   GLOBAL — Prevent horizontal overflow on mobile
+═══════════════════════════════════════════════ */
+html, body {
+  overflow-x: hidden;
+}
+.app-layout-page {
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════════
+   TRIAGE SESSION — Mobile input stack fix
+═══════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  .vitals-input-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .triage-action-buttons {
+    flex-direction: column !important;
+  }
+  .triage-action-buttons button {
+    width: 100% !important;
+  }
+}

@@ -180,7 +180,8 @@ const Analytics = () => {
       boxShadow: 'var(--shadow-sm)',
       transition: 'all 0.28s cubic-bezier(0.4, 0, 0.2, 1)',
       position: 'relative',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      cursor: 'pointer'
     },
     statIconBox: {
       width: '54px',
@@ -337,7 +338,13 @@ const Analytics = () => {
         {/* ═══ Section 1: Summary Stats ═══ */}
         <section style={styles.statsGrid}>
           {/* Total Patients */}
-          <div style={styles.statCard}>
+          <div
+            style={styles.statCard}
+            onClick={() => navigate('/')}
+            title="Go to Dashboard"
+            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = 'var(--shadow-lg)'; e.currentTarget.style.borderColor = 'var(--primary-solid)'; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = 'var(--shadow-sm)'; e.currentTarget.style.borderColor = 'var(--border-light)'; }}
+          >
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
               <span style={styles.statLabel}>{t('Total Patients Triaged', {hi: 'कुल मरीज़ देखे गए', te: 'మొత్తం రోగులు అంచనా వేయబడ్డారు'})}</span>
               <span style={styles.statValue}>{totalPatients}</span>
@@ -348,7 +355,13 @@ const Analytics = () => {
           </div>
 
           {/* Emergency Cases */}
-          <div style={styles.statCard}>
+          <div
+            style={styles.statCard}
+            onClick={() => navigate('/')}
+            title="View emergency cases on dashboard"
+            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = 'var(--shadow-lg)'; e.currentTarget.style.borderColor = 'var(--color-error)'; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = 'var(--shadow-sm)'; e.currentTarget.style.borderColor = 'var(--border-light)'; }}
+          >
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
               <span style={styles.statLabel}>{t('Emergency Cases', {hi: 'आपातकालीन मामले', te: 'అత్యవసర కేసులు'})}</span>
               <span style={{ ...styles.statValue, color: 'var(--color-error)' }}>{emergencyCases}</span>
@@ -360,7 +373,13 @@ const Analytics = () => {
           </div>
 
           {/* Stable Cases */}
-          <div style={styles.statCard}>
+          <div
+            style={styles.statCard}
+            onClick={() => navigate('/')}
+            title="View stable cases on dashboard"
+            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = 'var(--shadow-lg)'; e.currentTarget.style.borderColor = 'var(--color-success)'; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = 'var(--shadow-sm)'; e.currentTarget.style.borderColor = 'var(--border-light)'; }}
+          >
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
               <span style={styles.statLabel}>{t('Stable Cases', {hi: 'स्थिर मामले', te: 'స్థిరమైన కేసులు'})}</span>
               <span style={{ ...styles.statValue, color: 'var(--color-success)' }}>{stableCases}</span>
@@ -372,7 +391,11 @@ const Analytics = () => {
           </div>
 
           {/* Average Age */}
-          <div style={styles.statCard}>
+          <div
+            style={styles.statCard}
+            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = 'var(--shadow-lg)'; e.currentTarget.style.borderColor = '#6366f1'; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = 'var(--shadow-sm)'; e.currentTarget.style.borderColor = 'var(--border-light)'; }}
+          >
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
               <span style={styles.statLabel}>{t('Average Patient Age', {hi: 'मरीजों की औसत आयु', te: 'రోగి సగటు వయస్సు'})}</span>
               <span style={styles.statValue}>{avgAge}</span>
